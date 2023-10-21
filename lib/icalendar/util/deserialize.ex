@@ -253,7 +253,13 @@ defmodule ICalendar.Util.Deserialize do
   end
 
   def to_date(date_string, %{"VALUE" => "DATE"}) do
-    to_date(date_string <> "T000000Z")
+    # to_date(date_string <> "T000000Z")
+    date_string = if String.last(date_string) == "Z", do: date_string, else: date_string <> "Z"
+
+    case Timex.parse(date_string, "{YYYY}{0M}{0D}Z") do
+      {:ok, date} -> {:ok, Timex.to_date(date)}
+      error -> error
+    end
   end
 
   def to_date(date_string, %{}) do
