@@ -106,6 +106,14 @@ defmodule ICalendar.Util.KV do
     |> Enum.join("")
   end
 
+  def build("DTSTART", date = %Date{}) do
+    "DTSTART;VALUE=DATE:#{Value.to_ics(date)}\n"
+  end
+
+  def build("DTEND", date = %Date{}) do
+    "DTEND;VALUE=DATE:#{Value.to_ics(date)}\n"
+  end
+
   def build(key, date = %DateTime{time_zone: "Etc/UTC"}) do
     "#{key}:#{Value.to_ics(date)}Z\n"
   end
