@@ -40,8 +40,8 @@ defmodule ICalendar.EventTest do
 
     assert ics == """
            BEGIN:VEVENT
-           DTEND:20151224
-           DTSTART:20151224
+           DTEND;VALUE=DATE:20151224
+           DTSTART;VALUE=DATE:20151224
            END:VEVENT
            """
   end
